@@ -3,32 +3,42 @@ import { ProductCard } from '../../components/ProductCard';
 import ProductType from '../../types/Product/ProductType';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../components/Loading';
+import classNames from 'classnames';
 
 export default function Products() {
   const [products, setProducts] = useState<ProductType[]>();
   const [categories, setCategories] = useState<string[]>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const fetchProducts = async () => {
+    setIsLoading(true);
     try {
       const apiResponse = await axios.get('https://fakestoreapi.com/products');
 
       setProducts(apiResponse.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const fetchCategories = async () => {
+    setIsLoading(true);
     try {
       const apiResponse = await axios.get(
         'https://fakestoreapi.com/products/categories'
       );
 
       setCategories(apiResponse.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -41,21 +51,24 @@ export default function Products() {
   };
 
   const handleCategoryButton = async (category: string) => {
+    setIsLoading(true);
     try {
       const apiResponse = await axios.get(
         `https://fakestoreapi.com/products/category/${category}`
       );
 
-      console.log(apiResponse.data);
-
       setProducts([...apiResponse.data]);
+
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   return (
     <main className="p-10">
+      <Loading isLoading={isLoading} />
       <div className="w-full flex items-center justify-start p-5 md:p-0 md:py-5 md:justify-center overflow-y-auto space-x-4 mb-10 py-5 rounded-xl border shadow-sm">
         {categories && (
           <>

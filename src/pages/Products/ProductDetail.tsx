@@ -4,26 +4,31 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductDetail } from '../../components/ProductDetail';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import Loading from '../../components/Loading';
 
 export default function ProductsDetail() {
+  const [product, setProduct] = useState<ProductType>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { id } = useParams();
 
   const navigate = useNavigate();
 
-  const [product, setProduct] = useState<ProductType>();
-
   const fetchProduct = async () => {
+    setIsLoading(true);
+
     try {
       const apiResponse = await axios.get(
         `https://fakestoreapi.com/products/${id}`
       );
 
-      console.log(apiResponse.data);
-
       setProduct(apiResponse.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -32,6 +37,7 @@ export default function ProductsDetail() {
 
   return (
     <main className="p-10">
+      <Loading isLoading={isLoading} />
       <button
         onClick={() => navigate('/products')}
         className="absolute flex items-center justify-center bg-black w-14 h-14 rounded-full"
