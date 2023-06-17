@@ -49,9 +49,9 @@ export default function ProductsDetail() {
                 <ProductDetail.Price currency="USD" />
                 <ProductDetail.Rating />
               </div>
+              <ProductDetail.Description />
             </ProductDetail.Info>
           }
-          description={<ProductDetail.Description />}
         />
       )}
     </main>
