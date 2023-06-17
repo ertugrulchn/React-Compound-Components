@@ -2,7 +2,7 @@ import { useProductCardContext } from '../../contexts/Product/ProductCardContext
 
 export default function ProductRating() {
   const { product } = useProductCardContext();
-  const rating = Math.round(product.rating.rate);
+  const rating = product.rating.rate;
 
   return (
     <div>
