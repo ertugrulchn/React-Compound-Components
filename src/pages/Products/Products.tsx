@@ -4,7 +4,6 @@ import ProductType from '../../types/Product/ProductType';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
-import classNames from 'classnames';
 
 export default function Products() {
   const [products, setProducts] = useState<ProductType[]>();
