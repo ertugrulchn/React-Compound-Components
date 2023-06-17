@@ -7,6 +7,14 @@ export type ProductCardType = {
   info?: ReactNode;
   action: ReactNode;
 };
+
+export type ProductDetailType = {
+  product: ProductType;
+  image?: ReactNode;
+  info?: ReactNode;
+  description?: ReactNode;
+};
+
 export type ProductInfoType = {
   children: ReactNode;
 };
