@@ -19,7 +19,7 @@ export default function ProductDetail({
     <ProductDetailContext.Provider value={{ product }}>
       <div className="w-full h-screen container mx-auto border rounded-xl">
         <div className="w-full h-full flex justify-center">
-          <div className="w-full h-full grid grid-cols-2 rounded-xl">
+          <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 rounded-xl">
             <div className="flex items-center justify-center bg-white rounded-bl-xl rounded-tl-xl">
               {image}
             </div>
