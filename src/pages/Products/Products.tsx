@@ -4,6 +4,7 @@ import ProductType from '../../types/Product/ProductType';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
+import { BsFillBasket3Fill } from 'react-icons/bs';
 
 export default function Products() {
   const [products, setProducts] = useState<ProductType[]>();
@@ -68,7 +69,18 @@ export default function Products() {
   return (
     <main className="p-10">
       <Loading isLoading={isLoading} />
-      <div className="w-full flex items-center justify-start p-5 md:p-0 md:py-5 md:justify-center overflow-y-auto space-x-4 mb-10 py-5 rounded-xl border shadow-sm">
+
+      <div className="absolute right-0 top-0">
+        <button
+          type="button"
+          className="p-6 bg-black text-white mr-10 mt-5 w-[70px] h-[70px] flex items-center justify-center rounded-full shadow-sm"
+          onClick={() => navigate('/basket')}
+        >
+          <BsFillBasket3Fill className="text-white" size={26} />
+        </button>
+      </div>
+
+      <div className="mt-20 w-full flex items-center justify-start p-5 md:p-0 md:py-5 md:justify-center overflow-y-auto space-x-4 mb-10 py-5 rounded-xl border shadow-sm">
         {categories && (
           <>
             <button
@@ -92,6 +104,7 @@ export default function Products() {
           </>
         )}
       </div>
+
       {products && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {products.map((product) => (
